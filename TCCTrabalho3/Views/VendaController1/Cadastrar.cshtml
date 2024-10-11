@@ -1,0 +1,44 @@
+﻿@model VendasModel
+@{
+    ViewData["title"] = "Cadastrar Venda";
+}
+
+<div class="container bg-dark p-5 rounded-5">
+
+    <div class="mb-5 text-center">
+        <h1 class="text-light">Cadastro de Vendas</h1>
+    </div>
+
+    <form method="post" asp-controller="VendaController1" asp-action="Cadastrar">
+
+
+        <div class="mb-3">
+            <label for="Recebedor" class="form-label text-light">Recebedor</label>
+            <input type="text" class="form-control" asp-for="Recebedor" id="Recebedor" placeholder="Quem está recebendo o curso?">
+            <span asp-validation-for="Recebedor" class="form-label text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="Fornecedor" class="form-label text-light">Fornecedor</label>
+            <input type="text" class="form-control" asp-for="Fornecedor" id="Fornecedor" placeholder="Quem está Vendendo o curso?">
+            <span asp-validation-for="Fornecedor" class="form-label text-danger"></span>
+
+        </div>
+
+
+        <div class="mb-3">
+            <label for="Curso" class="form-label text-light">Curso</label>
+            <input type="text" class="form-control" asp-for="CursoVendido" id="Curso" placeholder="Qual o curso que está sendo vendido?">
+            <span asp-validation-for="CursoVendido" class="form-label text-danger"></span>
+
+        </div>
+
+        <div class="d-flex gap-5 mt-5">
+            <button type="submit" class="btn btn-success w-50">Adcionar</button>
+            <a class="btn btn-primary w-50" asp-controller="VendaController1" asp-action="Index">Voltar</a>
+        </div>
+
+
+    </form>
+</div>

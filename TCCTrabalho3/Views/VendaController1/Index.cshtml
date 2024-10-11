@@ -1,0 +1,60 @@
+﻿@model IEnumerable<VendasModel>
+
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1>Vendas</h1>
+        <a class="btn btn-success mx-2 " asp-controller="VendaController1" asp-action="Cadastrar"> <i class="bi bi-file-earmark-plus mx-2"></i> Cadastrar uma nova venda</a>
+    </div>
+
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success text-light" role="alert">
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alet-danger text-light" role="alert">
+            @TempData["MensagemErro"]
+        </div>
+    }
+
+
+    <table id="Vendas" class="table table-light table-hover mt-5">
+        <thead>
+            <tr>
+
+                <th scope="col">Recebedor</th>
+                <th scope="col">Fornecedor</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Última atualização</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody> 
+
+            @if (Model != null)
+            {
+
+                @foreach (var curso in Model)
+                {
+                    <tr>
+                        <th scope="row">@curso.Recebedor</th>
+                        <td>@curso.Fornecedor</td>
+                        <td>@curso.CursoVendido</td>
+                        <td>@curso.dataUltimaAtualizacao</td>
+                        <td>
+                            <a asp-controller="VendaController1" asp-action="Editar" asp-route-id="@curso.Id" class="btn btn-warning mx-2"> <i class="bi bi-pencil-square mx-2"></i> Editar</a>
+                            <a asp-controller="VendaController1" asp-action="Excluir" asp-route-id="@curso.Id" class="btn btn-danger mx-2"> <i class="bi bi-trash3-fill mx-2"></i> Excluir</a>
+                        </td>
+                    </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+</div>

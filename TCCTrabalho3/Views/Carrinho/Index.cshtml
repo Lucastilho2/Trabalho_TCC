@@ -1,0 +1,50 @@
+﻿@model TCCTrabalho3.Models.Carrinho
+
+@{
+    ViewData["Title"] = "Carrinho de Compras";
+}
+
+<div class="container">
+    <h1>Carrinho de Compras</h1>
+
+    @if (Model.Items.Count == 0)
+    {
+        <p>Seu carrinho está vazio.</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Curso</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                    <th>Total</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Cursos.Nome</td>
+                        <td>@item.Quantidade</td>
+                        <td>@item.Cursos.Preco.ToString("C")</td>
+                        <td>@(item.Quantidade * item.Cursos.Preco).ToString("C")</td>
+                        <td>
+                            <form asp-action="RemoverDoCarrinho" method="post">
+                                <input type="hidden" name="id" value="@item.CarrinhoItemId" />
+                                <button type="submit" class="btn btn-danger">Remover</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="d-flex justify-content-between">
+            <h4>Total: @(Model.Items.Sum(i => i.Quantidade * i.Cursos.Preco).ToString("C"))</h4>
+            <a asp-action="Checkout" class="btn btn-success">Finalizar Compra</a>
+        </div>
+    }
+</div>
